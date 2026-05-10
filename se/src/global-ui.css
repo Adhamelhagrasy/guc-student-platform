@@ -1,0 +1,117 @@
+/* App-wide UX: focus, motion, type — loaded once from main.jsx */
+
+:root {
+  --ui-focus: #60a5fa;
+  --ui-focus-ring: rgba(59, 130, 246, 0.45);
+  --ui-surface-ink: #0f172a;
+  --ui-error-text: #ef4444;
+  --ui-success-text: #86efac;
+}
+
+/**
+ * Validation / status copy — color uses `!important` so it always wins over
+ * nested layout rules (e.g. `.pd-job-card p`, drawer text, inherited theme).
+ */
+.field-error,
+.pd-inline-error,
+.ui-error-text {
+  color: var(--ui-error-text) !important;
+  font-weight: 700 !important;
+}
+
+.pd-inline-success,
+.ui-success-text {
+  color: var(--ui-success-text) !important;
+  font-weight: 700 !important;
+}
+
+/* Profile / ad-hoc blocks: spacing when not using `.field-error` margins */
+.ui-error-text {
+  margin-top: 2px;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.ui-success-text {
+  margin-top: 2px;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.35);
+  color: #f8fafc;
+}
+
+/* Keyboard focus — visible, on-brand; mouse clicks stay clean */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 3px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline-offset: 4px;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Project portfolio cards — clear press feedback (ProfilePage) */
+button.pp-btn-press {
+  transition:
+    transform 0.11s ease,
+    filter 0.11s ease,
+    box-shadow 0.15s ease;
+}
+
+button.pp-btn-press:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+button.pp-btn-press:active:not(:disabled) {
+  transform: scale(0.96);
+  filter: brightness(0.88);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button.pp-btn-press:active:not(:disabled) {
+    transform: none;
+    filter: brightness(0.85);
+  }
+}
